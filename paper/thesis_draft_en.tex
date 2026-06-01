@@ -75,8 +75,8 @@ Hypercube networks use a recursive dimension-based structure. An \(m\)-dimension
 \begin{table}[!t]
 \centering
 \caption{Wired topology baselines: structure and reason for inclusion.}
-\small
-\begin{tabular}{p{0.18\linewidth}p{0.30\linewidth}p{0.40\linewidth}}
+\scriptsize
+\begin{tabular}{p{0.18\columnwidth}p{0.28\columnwidth}p{0.38\columnwidth}}
 \toprule
 Topology & Structure & Why included \\
 \midrule
@@ -87,7 +87,6 @@ Hypercube & Dimension-based recursive graph & Theoretical low-diameter baseline 
 Torus & Nearest-neighbor grid & Classical HPC locality baseline \\
 \bottomrule
 \end{tabular}
-\normalsize
 \end{table}
 
 \subsection{Traffic-aware throughput and TopoBench}
@@ -116,10 +115,11 @@ Capacity metrics divide into two types. \emph{Traffic-independent} capacity eval
 
 The notation follows the presentation slides: \(B\) is per-link bandwidth, \(BW\) is bisection width, and \(BB\) is bisection bandwidth. Thus \(BB = BW \cdot B\). The main output is the relative wireless link bandwidth \(B_{\mathrm{wireless}}/B_{\mathrm{wired}}\).
 
-\begin{table}[h]
+\begin{table}[!t]
 \centering
 \caption{Notation used in the required-bandwidth analysis.}
-\begin{tabular}{ll}
+\scriptsize
+\begin{tabular}{p{0.20\columnwidth}p{0.70\columnwidth}}
 \toprule
 Symbol & Meaning \\
 \midrule
@@ -218,9 +218,10 @@ If a bottleneck endpoint is incident to \(\mu(T)\) requested wireless pairs unde
 K_{\mathrm{wireless}}(T,c) &= \frac{c}{\mu(T)}.
 \end{align}
 
-\begin{table}[h]
+\begin{table*}[!t]
 \centering
 \caption{Analytical wireless scaling factor by traffic mode.}
+\small
 \begin{tabular}{llccc}
 \toprule
 Mode & Workload & \(\mu(T)\) & Wireless constraint & \(K_{\mathrm{wireless}}\) \\
@@ -230,7 +231,7 @@ Mode & Workload & \(\mu(T)\) & Wireless constraint & \(K_{\mathrm{wireless}}\) \
 4 & Longest matching & 1 & \(K_{\mathrm{wireless}} \le c\) & \(c\) \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
 Mode 0 and mode 4 have model caveats. Mode 0 uses \(\mu=2\) because source and destination participation are counted against the same endpoint active-link budget. Mode 4 uses \(\mu=1\) because reciprocal directed demands are interpreted as sharing one full-duplex active peer link. Different transmit/receive or half-duplex assumptions would change these denominators.
 
@@ -241,8 +242,9 @@ The bisection-width inputs used for the structural comparison are summarized bel
 \begin{table}[!t]
 \centering
 \caption{Bisection-width inputs and ideal relative \(BW\) for wired baselines.}
-\small
-\begin{tabular}{p{0.23\linewidth}p{0.31\linewidth}p{0.34\linewidth}}
+\scriptsize
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{p{0.21\columnwidth}p{0.31\columnwidth}p{0.34\columnwidth}}
 \toprule
 Topology & Bisection-width input \(BW_{\mathrm{wired}}\) & Relative \(BW_{\mathrm{wired}}/BW_{\mathrm{wireless}}\) \\
 \midrule
@@ -253,22 +255,22 @@ Dragonfly & \(\left\lfloor g/2\right\rfloor\left\lceil g/2\right\rceil\) & \(4\l
 Torus, even \(d\)-dimensional & \(2N^{1-1/d}\) & \(8/N^{1+1/d}\) \\
 \bottomrule
 \end{tabular}
-\normalsize
+}
 \end{table}
 
 For the numerical structural examples, the main server counts are \(N=1024\) for Fat-tree, Jellyfish, Hypercube, and the three-dimensional Torus example, and \(N=1056\) for the Dragonfly row.
 
 For the Dragonfly row, the bisection expression starts from the product of the two sides of the group-level cut:
-\begin{equation}
+\begin{align}
 BW_{\mathrm{wired,Dragonfly}}
-=
+&=
 \left\lfloor\frac{g}{2}\right\rfloor
-\left\lceil\frac{g}{2}\right\rceil
-=
+\left\lceil\frac{g}{2}\right\rceil \notag\\
+&=
 \frac{2N+\sqrt{1+4N}-1}{8}
 \approx
 \frac{N+\sqrt{N}}{4}.
-\end{equation}
+\end{align}
 
 \section{Methodology}
 
@@ -296,6 +298,8 @@ The ideal bisection results are structural upper-bound results. They assume all 
 \begin{table}[!t]
 \centering
 \caption{Ideal full-mesh bisection required minimum \(B_{\mathrm{wireless}}/B_{\mathrm{wired}}\) by topology.}
+\scriptsize
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{ll}
 \toprule
 Topology & Required minimum \(B_{\mathrm{wireless}}/B_{\mathrm{wired}}\) \\
@@ -307,11 +311,14 @@ Dragonfly & \(4\left\lfloor g/2\right\rfloor\left\lceil g/2\right\rceil/N^2=(2N+
 Torus, even \(d\)-dimensional & \(8/N^{1+1/d}\) \\
 \bottomrule
 \end{tabular}
+}
 \end{table}
 
 \begin{center}
 \textbf{Ideal bisection relative \(BW\) values at the numerical \(N\) used in this thesis.}
 
+\scriptsize
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{lrr}
 \toprule
 Topology & \(N\) & Relative \(BW_{\mathrm{wired}}/BW_{\mathrm{wireless}}\) \\
@@ -323,6 +330,7 @@ Dragonfly & 1056 & 0.000976 \\
 Torus, \(d=3\) & 1024 & 0.000775 \\
 \bottomrule
 \end{tabular}
+}
 \end{center}
 
 For \(N=1024\), the Fat-tree and Hypercube ideal required minimum bandwidth is
@@ -384,6 +392,8 @@ The symbolic required minimum bandwidths follow directly from substituting each 
 \begin{table}[!t]
 \centering
 \caption{Connection-limited bisection required minimum \(B_{\mathrm{wireless}}/B_{\mathrm{wired}}\), symbolic form.}
+\scriptsize
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{ll}
 \toprule
 Topology & Required minimum \(B_{\mathrm{wireless}}/B_{\mathrm{wired}}\) \\
@@ -395,13 +405,15 @@ Dragonfly & \((2N+\sqrt{1+4N}-1)\,/\,(4cN)\) \\
 Torus, even \(d\)-dimensional & \(4\,/\,(cN^{1/d})\) \\
 \bottomrule
 \end{tabular}
+}
 \end{table}
 
 The Fat-tree and Hypercube symbolic results (\(1/c\)) are independent of \(N\): once \(c\) is fixed, the required bandwidth does not improve as the system scales. Dragonfly converges to \(1/(2c)\) for large \(N\), while Torus decreases as \(N^{-1/d}\) and therefore still improves with scale, but more slowly than the ideal model predicts.
 
-\begin{table}[!t]
+\begin{table*}[!t]
 \centering
 \caption{Connection-limited bisection required minimum \(B_{\mathrm{wireless}}/B_{\mathrm{wired}}\), numerical values.}
+\small
 \begin{tabular}{lrrrrr}
 \toprule
 Topology & \(N\) & \(c=1\) & \(c=2\) & \(c=3\) & \(c=4\) \\
@@ -413,7 +425,7 @@ Dragonfly & 1056 & 0.515152 & 0.257576 & 0.171717 & 0.128788 \\
 Torus, \(d=3\) & 1024 & 0.396850 & 0.198425 & 0.132283 & 0.099213 \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
 For the analytical Torus row, a uniform even \(d\)-dimensional torus has
 \begin{equation}
@@ -438,7 +450,7 @@ Figures~\ref{fig:fattree-cl}--\ref{fig:torus-cl} plot the required wireless band
   xticklabels={$2^6$,$2^7$,$2^8$,$2^9$,$2^{10}$,$2^{11}$,$2^{12}$,$2^{13}$},
   xmin=64, xmax=8192,
   ymin=0, ymax=1.08,
-  legend pos=outer north east,
+  legend pos=north east,
   legend style={font=\small},
   grid=both,
   grid style={dashed,gray!30},
@@ -469,7 +481,7 @@ Figures~\ref{fig:fattree-cl}--\ref{fig:torus-cl} plot the required wireless band
   xticklabels={$2^6$,$2^7$,$2^8$,$2^9$,$2^{10}$,$2^{11}$,$2^{12}$,$2^{13}$},
   xmin=64, xmax=8192,
   ymin=0, ymax=0.62,
-  legend pos=outer north east,
+  legend pos=north east,
   legend style={font=\small},
   grid=both,
   grid style={dashed,gray!30},
@@ -504,7 +516,7 @@ Figures~\ref{fig:fattree-cl}--\ref{fig:torus-cl} plot the required wireless band
   xticklabels={$2^6$,$2^7$,$2^8$,$2^9$,$2^{10}$,$2^{11}$,$2^{12}$,$2^{13}$},
   xmin=64, xmax=8192,
   ymin=0, ymax=1.08,
-  legend pos=outer north east,
+  legend pos=north east,
   legend style={font=\small},
   grid=both,
   grid style={dashed,gray!30},
@@ -525,22 +537,23 @@ Figures~\ref{fig:fattree-cl}--\ref{fig:torus-cl} plot the required wireless band
 The traffic-aware analysis fixes \(N=1024\) servers. Jyothi et al.\ state that on a 32\,GB machine the longest-matching LP scales to 1,024 servers, while the Kodialam TM can only reach 128 nodes before exhausting solver memory \cite{jyothi2016}. Therefore, \(N=1024\) is the practical LP-solver limit for the longest-matching workload, and it is used here as the representative scale for all three traffic modes.
 
 Jyothi et al. Table I reports relative throughput trends, not raw TopoBench objective values \cite{jyothi2016}. Because the exact Jellyfish random-generation parameter needed to reproduce the SC 2016 table was not identified, this thesis uses a local \(N=1024\) Jellyfish run as the raw-\(K\) anchor. The local Fat-tree-to-Jellyfish ratios are close enough to the Table I relative direction to make the reconstruction feasible as an approximate trend check. The reconstructed estimate is
-\begin{equation}
+\begin{align}
 K_{\mathrm{est}}(\mathrm{topology},T)
-=
+&=
 K_{\mathrm{local}}(\mathrm{Jellyfish},T)
-\times
+\notag\\
+&\quad\times
 t_{\mathrm{Table\,I}}(\mathrm{topology},T).
-\end{equation}
+\end{align}
 The following table uses the reconstructed raw-\(K\) estimates also shown in the presentation. All entries are evaluated at \(N=1024\) servers. These values are not raw values printed by Jyothi et al.; they are reconstructed estimates from Table I relative throughput using the local Jellyfish anchor.
 
-\begin{table}[!t]
+\begin{table*}[!t]
 \centering
 \caption{Traffic-aware required minimum bandwidth using reconstructed \(K_{\mathrm{wired}}\) estimates at \(N=1024\).}
 \label{tab:traffic-reconstructed}
 \small
-\setlength{\tabcolsep}{2pt}
-\begin{tabular}{@{}p{0.20\linewidth}p{0.16\linewidth}p{0.12\linewidth}p{0.12\linewidth}p{0.25\linewidth}@{}}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}p{0.22\textwidth}p{0.17\textwidth}p{0.13\textwidth}p{0.13\textwidth}p{0.22\textwidth}@{}}
 \toprule
 Topology & Workload & \(K_{\mathrm{wired}}\) & \(K_{\mathrm{wireless}}\) & Required minimum \(B_{\mathrm{wireless}}/B_{\mathrm{wired}}\) \\
 \midrule
@@ -558,8 +571,7 @@ Dragonfly, reconstructed & All-to-all & 0.00145988 & \(c/1023\) & \(1.49345724/c
 Dragonfly, reconstructed & Longest matching & 0.82483659 & \(c\) & \(0.82483659/c\) \\
 \bottomrule
 \end{tabular}
-\normalsize
-\end{table}
+\end{table*}
 
 The traffic-aware required bandwidth values are much larger than the ideal bisection values because the wireless denominator is limited by endpoint active-link budget rather than by the number of possible full-mesh pairs. This comparison should be read as an approximate traffic-aware trend, not as a hardware-equivalent wireless simulation.
 
@@ -634,6 +646,8 @@ The main text uses topology-specific numerical sizes where needed. This appendix
 \begin{table}[!t]
 \centering
 \caption{Ideal full-mesh relative \(BW\) values at \(N=1024\).}
+\scriptsize
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{lr}
 \toprule
 Topology & Relative \(BW_{\mathrm{wired}}/BW_{\mathrm{wireless}}\) \\
@@ -645,11 +659,13 @@ Dragonfly, group-level cut expression & 0.001007 \\
 Torus, \(d=3\) & 0.000775 \\
 \bottomrule
 \end{tabular}
+}
 \end{table}
 
-\begin{table}[!t]
+\begin{table*}[!t]
 \centering
 \caption{Connection-limited relative \(BW\) values at \(N=1024\).}
+\small
 \begin{tabular}{lrrrr}
 \toprule
 Topology & \(c=1\) & \(c=2\) & \(c=3\) & \(c=4\) \\
@@ -661,17 +677,17 @@ Dragonfly, group-level cut expression & 0.515383 & 0.257692 & 0.171794 & 0.12884
 Torus, \(d=3\) & 0.396850 & 0.198425 & 0.132283 & 0.099213 \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
 \section{Local Raw \(K\) and Jyothi Table I Consistency}
 
 Jyothi et al. report relative throughput after normalizing each topology by a same-equipment random graph, so Table I gives comparison ratios rather than raw LP objective values \cite{jyothi2016}. The following table keeps the local Fat-tree comparison used to decide whether the local Jellyfish raw \(K\) values are a feasible anchor for reconstructing approximate raw \(K\) values from Table I. The agreement is not exact, so this thesis uses the reconstruction only for trend comparison.
 
-\begin{table}[!t]
+\begin{table*}[!t]
 \centering
 \caption{Local Fat-tree relative throughput compared with Jyothi et al. Table I.}
-\scriptsize
-\setlength{\tabcolsep}{2pt}
+\small
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lcrrrr@{}}
 \toprule
 Workload & Mode & Local raw \(K\) & Local rel. & Jyothi rel. & Reconstructed \(K\) \\
@@ -681,16 +697,16 @@ All-to-all & 1 & 0.00098424 & 0.641169 & 0.65 & 0.00099887 \\
 Longest match. & 4 & 0.99999985 & 0.874961 & 0.89 & 1.01958967 \\
 \bottomrule
 \end{tabular}
-\normalsize
-\end{table}
+\end{table*}
 
 \section{Local TopoBench \(K\) Sensitivity Table}
 
 The main traffic-aware table uses reconstructed estimates from Jyothi et al. Table I rather than direct local \(K\) values. The following table preserves the direct local values as a sensitivity check only. Each cell substitutes \(c=1,2,3,4\) into the same mode-specific expressions used in Table~\ref{tab:traffic-reconstructed}: \(2K_{\mathrm{wired}}/c\) for random permutation, \(K_{\mathrm{wired}}(N-1)/c\) for all-to-all, and \(K_{\mathrm{wired}}/c\) for longest matching. These values are not used as the main paper-aligned result table.
 
-\begin{table}[!t]
+\begin{table*}[!t]
 \centering
 \caption{Direct local traffic-aware required bandwidth values after substituting \(c=1,2,3,4\).}
+\small
 \begin{tabular}{llrrrr}
 \toprule
 Topology & Workload & \(c=1\) & \(c=2\) & \(c=3\) & \(c=4\) \\
@@ -709,7 +725,7 @@ Dragonfly & All-to-all & 1.020185 & 0.510092 & 0.340062 & 0.255046 \\
 Dragonfly & Longest matching & 0.523901 & 0.261950 & 0.174634 & 0.130975 \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
 \begin{thebibliography}{9}
 
