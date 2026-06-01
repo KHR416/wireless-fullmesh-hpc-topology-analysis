@@ -18,7 +18,7 @@ TopoBench reproduction and modifications are intentionally kept in a separate re
 https://github.com/KHR416/topobench
 ```
 
-That repository preserves the TopoBench commit history and makes the local modifications visible in git history.
+That repository preserves the TopoBench commit history and makes the local modifications visible in git history. Its `README` and `CHANGES.md` describe how `resultfiles/jyothi_raw*/raw_results.csv` and `raw_summary.csv` are generated with `scripts/jyothi_raw_sweep.sh`.
 
 ## Build
 
