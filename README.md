@@ -15,7 +15,7 @@ This repository contains the cleaned thesis/poster handoff materials for the wir
 TopoBench reproduction and modifications are intentionally kept in a separate repository:
 
 ```text
-../topobench-wireless-fullmesh
+https://github.com/KHR416/topobench
 ```
 
 That repository preserves the TopoBench commit history and makes the local modifications visible in git history.
