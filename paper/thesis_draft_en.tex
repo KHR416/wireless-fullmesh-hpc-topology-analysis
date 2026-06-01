@@ -1,19 +1,12 @@
-\documentclass[11pt]{article}
-\usepackage[margin=1in]{geometry}
+\documentclass[conference]{IEEEtran}
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs}
 \usepackage{array}
-\usepackage{longtable}
-\usepackage{float}
 \usepackage{hyperref}
-\usepackage{enumitem}
-\setlist{nosep}
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
-\newcommand{\IEEEauthorblockN}[1]{\textbf{#1}\\[0.5ex]}
-\newcommand{\IEEEauthorblockA}[1]{\begin{tabular}[t]{c}#1\end{tabular}}
 
 \title{Analysis of Required Link Bandwidth for Wireless Full-Mesh Networks}
 \author{
@@ -21,7 +14,6 @@
 \IEEEauthorblockA{\textit{School of Electrical Engineering, Korea University, Seoul, South Korea} \\
 \{hyy741, logan10, koyc\}@korea.ac.kr}
 }
-\date{June 2026}
 
 \begin{document}
 \maketitle
@@ -34,7 +26,9 @@ The thesis separates structural and traffic-aware metrics. The main analytical r
 The result is that the answer depends strongly on the wireless model. Under the ideal full-mesh bisection model, an equal cut has \(N^2/4\) possible cross-cut wireless links, so the required per-link wireless bandwidth decreases as \(O(1/N)\). Under a connection-limited model where each endpoint can maintain only \(c\) active wireless links at a time, the same bisection requirement changes to \(O(1/c)\). Therefore, the practical bottleneck is not only per-link bandwidth; it is also the number of simultaneous active wireless links each endpoint can sustain.
 \end{abstract}
 
-\noindent\textbf{Keywords:} HPC network topology; wireless full-mesh; bisection bandwidth; maximum concurrent flow; TopoBench; Fat-tree; Jellyfish; Dragonfly; Torus; Hypercube
+\begin{IEEEkeywords}
+HPC network topology; wireless full-mesh; bisection bandwidth; maximum concurrent flow; TopoBench; Fat-tree; Jellyfish; Dragonfly; Torus; Hypercube
+\end{IEEEkeywords}
 
 \section{Introduction}
 
@@ -78,7 +72,7 @@ Torus networks connect nodes through nearest-neighbor grid-like links and are a 
 
 Hypercube networks use a recursive dimension-based structure. An \(m\)-dimensional hypercube has \(N=2^m\) nodes, degree \(m\), and bisection width \(2^{m-1}=N/2\) \cite{leighton1992}.
 
-\begin{table}[H]
+\begin{table}[!t]
 \centering
 \caption{Wired topology baselines: structure and reason for inclusion.}
 \small
@@ -244,7 +238,7 @@ Mode 0 and mode 4 have model caveats. Mode 0 uses \(\mu=2\) because source and d
 
 The bisection-width inputs used for the structural comparison are summarized below. The relative \(BW\) column gives \(BW_{\mathrm{wired}}/BW_{\mathrm{wireless}}\) under the ideal full-mesh bisection width \(BW_{\mathrm{wireless}}\approx N^2/4\).
 
-\begin{table}[H]
+\begin{table}[!t]
 \centering
 \caption{Bisection-width inputs and ideal relative \(BW\) for wired baselines.}
 \small
@@ -299,7 +293,7 @@ The numerical traffic-aware table uses reconstructed \(K\) values derived from J
 
 The ideal bisection results are structural upper-bound results. They assume all \(N^2/4\) cross-cut wireless links can be active simultaneously.
 
-\begin{table}[H]
+\begin{table}[!t]
 \centering
 \caption{Ideal full-mesh bisection required minimum \(B_{\mathrm{wireless}}/B_{\mathrm{wired}}\) by topology.}
 \begin{tabular}{ll}
@@ -347,7 +341,7 @@ so the ideal cross-cut count of 262,144 represents approximately half of all pos
 
 Figure~\ref{fig:ideal-bisection} shows how the ideal required bandwidth decreases with \(N\) across all five topology families. All curves converge toward zero, with Jellyfish requiring the largest relative wireless bandwidth and 3D Torus the smallest.
 
-\begin{figure}[H]
+\begin{figure}[!t]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
@@ -387,7 +381,7 @@ With a per-node active-link limit \(c\), the required bandwidth no longer decrea
 
 The symbolic required minimum bandwidths follow directly from substituting each wired bisection width into the connection-limited expression \(B_{\mathrm{wireless}}/B_{\mathrm{wired}} \ge 2BW_{\mathrm{wired}}/(cN)\).
 
-\begin{table}[H]
+\begin{table}[!t]
 \centering
 \caption{Connection-limited bisection required minimum \(B_{\mathrm{wireless}}/B_{\mathrm{wired}}\), symbolic form.}
 \begin{tabular}{ll}
@@ -405,7 +399,7 @@ Torus, even \(d\)-dimensional & \(4\,/\,(cN^{1/d})\) \\
 
 The Fat-tree and Hypercube symbolic results (\(1/c\)) are independent of \(N\): once \(c\) is fixed, the required bandwidth does not improve as the system scales. Dragonfly converges to \(1/(2c)\) for large \(N\), while Torus decreases as \(N^{-1/d}\) and therefore still improves with scale, but more slowly than the ideal model predicts.
 
-\begin{table}[H]
+\begin{table}[!t]
 \centering
 \caption{Connection-limited bisection required minimum \(B_{\mathrm{wireless}}/B_{\mathrm{wired}}\), numerical values.}
 \begin{tabular}{lrrrrr}
@@ -429,7 +423,7 @@ These results show the main structural conclusion. The ideal model suggests that
 
 Figures~\ref{fig:fattree-cl}--\ref{fig:torus-cl} plot the required wireless bandwidth against \(N\) for representative topologies at \(c=1,2,3,4\).
 
-\begin{figure}[H]
+\begin{figure}[!t]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
@@ -460,7 +454,7 @@ Figures~\ref{fig:fattree-cl}--\ref{fig:torus-cl} plot the required wireless band
 \label{fig:fattree-cl}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[!t]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
@@ -495,7 +489,7 @@ Figures~\ref{fig:fattree-cl}--\ref{fig:torus-cl} plot the required wireless band
 \label{fig:dragonfly-cl}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[!t]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
@@ -540,7 +534,7 @@ t_{\mathrm{Table\,I}}(\mathrm{topology},T).
 \end{equation}
 The following table uses the reconstructed raw-\(K\) estimates also shown in the presentation. All entries are evaluated at \(N=1024\) servers. These values are not raw values printed by Jyothi et al.; they are reconstructed estimates from Table I relative throughput using the local Jellyfish anchor.
 
-\begin{table}[H]
+\begin{table}[!t]
 \centering
 \caption{Traffic-aware required minimum bandwidth using reconstructed \(K_{\mathrm{wired}}\) estimates at \(N=1024\).}
 \label{tab:traffic-reconstructed}
@@ -571,21 +565,21 @@ The traffic-aware required bandwidth values are much larger than the ideal bisec
 
 Figures~\ref{fig:k-mode0}--\ref{fig:k-mode4} show the traffic-aware required bandwidth as a function of active-link budget \(c\), with \(N=1024\) fixed. Each figure contains one line per wired topology. Since \(K_{\mathrm{wired}}\) is constant and \(K_{\mathrm{wireless}}\) is proportional to \(c\), all curves follow a \(1/c\) shape; the topology ordering and absolute level differ by traffic mode.
 
-\begin{figure}[H]
+\begin{figure}[!t]
 \centering
 \includegraphics[width=0.85\linewidth]{../figures/k_threshold/c_sweep/k_threshold_mode_0_c_sweep_N1024.png}
 \caption{Mode~0 (random permutation): required minimum \(B_{\mathrm{wireless}}/B_{\mathrm{wired}}\) vs active-link budget \(c\) at \(N=1024\). The required bandwidth is \(2K_{\mathrm{wired}}/c\). Jellyfish requires the highest wireless bandwidth; Fat-tree the lowest among the four topologies.}
 \label{fig:k-mode0}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[!t]
 \centering
 \includegraphics[width=0.85\linewidth]{../figures/k_threshold/c_sweep/k_threshold_mode_1_c_sweep_N1024.png}
 \caption{Mode~1 (all-to-all): required minimum \(B_{\mathrm{wireless}}/B_{\mathrm{wired}}\) vs \(c\) at \(N=1024\). The required bandwidth is \(K_{\mathrm{wired}}(N-1)/c\). At \(N=1024\), the absolute values are comparable to mode~0, but the all-to-all required bandwidth grows with \(N\), so all-to-all becomes increasingly demanding at large scale.}
 \label{fig:k-mode1}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[!t]
 \centering
 \includegraphics[width=0.85\linewidth]{../figures/k_threshold/c_sweep/k_threshold_mode_4_c_sweep_N1024.png}
 \caption{Mode~4 (longest matching): required minimum \(B_{\mathrm{wireless}}/B_{\mathrm{wired}}\) vs \(c\) at \(N=1024\). The required bandwidth is \(K_{\mathrm{wired}}/c\). Hypercube has a notably lower required bandwidth than the other topologies because its longest-matching \(K_{\mathrm{wired}}\) is low.}
@@ -630,14 +624,14 @@ The traffic-aware result further shows that the required bandwidth depends on th
 
 The practical conclusion is that wireless full-mesh feasibility is dominated by active-link capability, not only by per-link bandwidth. A sufficiently high wireless link rate is necessary, but it is not enough unless the system can also provide enough simultaneous active peer connections for the target workload. Future work should connect the abstract \(c\)-limited model to concrete wireless hardware, interference-aware scheduling, and packet-level routing experiments.
 
-\appendix
+\appendices
 
 \section{Structural Relative-BW Tables at \(N=1024\)}
 
 The main text uses topology-specific numerical sizes where needed. This appendix fixes \(N=1024\) for a compact structural comparison. The values are relative bisection-width requirements, meaning the minimum \(B_{\mathrm{wireless}}/B_{\mathrm{wired}}\) implied by the corresponding bisection model. The Dragonfly row uses the group-level cut expression
 \(\left(2N+\sqrt{1+4N}-1\right)/(2N^2)\) for the ideal case and the corresponding connection-limited expression.
 
-\begin{table}[H]
+\begin{table}[!t]
 \centering
 \caption{Ideal full-mesh relative \(BW\) values at \(N=1024\).}
 \begin{tabular}{lr}
@@ -653,7 +647,7 @@ Torus, \(d=3\) & 0.000775 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[!t]
 \centering
 \caption{Connection-limited relative \(BW\) values at \(N=1024\).}
 \begin{tabular}{lrrrr}
@@ -673,7 +667,7 @@ Torus, \(d=3\) & 0.396850 & 0.198425 & 0.132283 & 0.099213 \\
 
 Jyothi et al. report relative throughput after normalizing each topology by a same-equipment random graph, so Table I gives comparison ratios rather than raw LP objective values \cite{jyothi2016}. The following table keeps the local Fat-tree comparison used to decide whether the local Jellyfish raw \(K\) values are a feasible anchor for reconstructing approximate raw \(K\) values from Table I. The agreement is not exact, so this thesis uses the reconstruction only for trend comparison.
 
-\begin{table}[H]
+\begin{table}[!t]
 \centering
 \caption{Local Fat-tree relative throughput compared with Jyothi et al. Table I.}
 \scriptsize
@@ -694,7 +688,7 @@ Longest match. & 4 & 0.99999985 & 0.874961 & 0.89 & 1.01958967 \\
 
 The main traffic-aware table uses reconstructed estimates from Jyothi et al. Table I rather than direct local \(K\) values. The following table preserves the direct local values as a sensitivity check only. Each cell substitutes \(c=1,2,3,4\) into the same mode-specific expressions used in Table~\ref{tab:traffic-reconstructed}: \(2K_{\mathrm{wired}}/c\) for random permutation, \(K_{\mathrm{wired}}(N-1)/c\) for all-to-all, and \(K_{\mathrm{wired}}/c\) for longest matching. These values are not used as the main paper-aligned result table.
 
-\begin{table}[H]
+\begin{table}[!t]
 \centering
 \caption{Direct local traffic-aware required bandwidth values after substituting \(c=1,2,3,4\).}
 \begin{tabular}{llrrrr}
